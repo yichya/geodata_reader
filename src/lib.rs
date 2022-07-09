@@ -4,7 +4,8 @@ use eframe::{egui, epi};
 use std::sync::{Arc, Mutex};
 
 #[cfg(not(target_arch = "wasm32"))]
-const GEOSITE_URL: &str = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat";
+const GEOSITE_URL: &str =
+    "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat";
 
 enum Download {
     None,
@@ -25,11 +26,7 @@ impl Default for MyApp {
 }
 
 impl epi::App for MyApp {
-    fn name(&self) -> &str {
-        "geodata_reader"
-    }
-
-    fn update(&mut self, ctx: &egui::CtxRef, _frame: &epi::Frame) {
+    fn update(&mut self, ctx: &egui::CtxRef, frame: &epi::Frame) {
         let mut trigger_download = false;
         egui::CentralPanel::default().show(ctx, |ui| {
             egui::ScrollArea::vertical().show(ui, |ui| {
@@ -37,35 +34,24 @@ impl epi::App for MyApp {
                 match gm {
                     Download::Done(r) => match r {
                         Ok(geosite) => {
-                            egui::CollapsingHeader::new(GEOSITE_URL)
-                                .default_open(false)
-                                .show(ui, |ui| {
-                                    egui::Grid::new(GEOSITE_URL)
-                                        .spacing(egui::vec2(ui.spacing().item_spacing.x * 2.0, 0.0))
-                                        .show(ui, |ui| {
-                                            for (index, element) in geosite.entry.iter().enumerate()
-                                            {
-                                                egui::CollapsingHeader::new(&element.country_code)
-                                                    .default_open(false)
-                                                    .show(ui, |ui| {
-                                                        egui::Grid::new(index)
-                                                            .spacing(egui::vec2(
-                                                                ui.spacing().item_spacing.x * 2.0,
-                                                                0.0,
-                                                            ))
-                                                            .show(ui, |ui| {
-                                                                for ele2 in
-                                                                &geosite.entry[index].domain
-                                                                {
-                                                                    ui.label(&ele2.value);
-                                                                    ui.end_row()
-                                                                }
-                                                            })
-                                                    });
-                                                ui.end_row()
-                                            }
-                                        })
-                                });
+                            for (index, element) in geosite.entry.iter().enumerate() {
+                                egui::CollapsingHeader::new(&element.country_code)
+                                    .default_open(false)
+                                    .show(ui, |ui| {
+                                        egui::Grid::new(index)
+                                            .spacing(egui::vec2(
+                                                ui.spacing().item_spacing.x * 2.0,
+                                                0.0,
+                                            ))
+                                            .show(ui, |ui| {
+                                                for ele2 in &geosite.entry[index].domain {
+                                                    ui.monospace(&ele2.value);
+                                                    ui.end_row()
+                                                }
+                                            })
+                                    });
+                                ui.end_row()
+                            }
                         }
                         Err(_error) => {
                             egui::CollapsingHeader::new("Download Failed")
@@ -90,19 +76,22 @@ impl epi::App for MyApp {
         });
 
         if trigger_download {
-            self.update();
+            let request = ehttp::Request::get(GEOSITE_URL);
+            let download_store = self.geosite.clone();
+            *download_store.lock().unwrap() = Download::InProgress;
+            let frame = frame.clone();
+            ehttp::fetch(request, move |response| {
+                *download_store.lock().unwrap() = Download::Done(Ok(geodata::deserialize_geosite(
+                    &response.unwrap().bytes,
+                )
+                .unwrap()));
+                frame.request_repaint();
+            });
         }
     }
-}
 
-impl MyApp {
-    fn update(&mut self) {
-        let request = ehttp::Request::get(GEOSITE_URL);
-        let download_store = self.geosite.clone();
-        *download_store.lock().unwrap() = Download::InProgress;
-        ehttp::fetch(request, move |response| {
-            *download_store.lock().unwrap() = Download::Done(Ok(geodata::deserialize_geosite(&response.unwrap().bytes).unwrap()));
-        });
+    fn name(&self) -> &str {
+        "geodata_reader"
     }
 }
 
