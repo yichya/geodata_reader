@@ -1,0 +1,14 @@
+{
+  "admin/services/geodata_reader": {
+    "title": "GeoData Reader",
+    "action": {
+      "type": "view",
+      "path": "geodata_reader"
+    },
+    "depends": {
+      "acl": [
+        "luci-app-geodata-reader"
+      ]
+    }
+  }
+}

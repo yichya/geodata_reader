@@ -1,0 +1,15 @@
+{
+  "luci-app-geodata-reader": {
+    "description": "Grant access to geodata-reader",
+    "read": {
+      "uci": [
+        "geodata_reader"
+      ]
+    },
+    "write": {
+      "uci": [
+        "geodata_reader"
+      ]
+    }
+  }
+}

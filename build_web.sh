@@ -48,6 +48,7 @@ echo "Generating JS bindings for wasm…"
 TARGET_NAME="${CRATE_NAME}.wasm"
 wasm-bindgen "target/wasm32-unknown-unknown/$BUILD/$TARGET_NAME" \
   --out-dir docs --no-modules --no-typescript
+cat init.js >> docs/geodata_reader.js
 # wasm-pack build example_eframe --out-dir docs
 
 # to get wasm-strip:  apt/brew/dnf install wabt
