@@ -1,6 +1,7 @@
 mod geodata;
 
 use eframe::{egui, epi};
+use egui::Vec2;
 use std::sync::{Arc, Mutex};
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -93,11 +94,16 @@ impl epi::App for MyApp {
     fn name(&self) -> &str {
         "geodata_reader"
     }
+
+    #[cfg(target_arch = "wasm32")]
+    fn max_size_points(&self) -> Vec2 {
+        Vec2::new(940.0, 750.0)
+    }
 }
 
 // ----------------------------------------------------------------------------
 #[cfg(target_arch = "wasm32")]
-const GEOSITE_URL: &str = "xray-1.5.8/geosite.dat";
+const GEOSITE_URL: &str = "/geosite.dat";
 
 #[cfg(target_arch = "wasm32")]
 use eframe::wasm_bindgen::{self, prelude::*};
