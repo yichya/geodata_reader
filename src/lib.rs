@@ -1,7 +1,6 @@
 mod geodata;
 
 use eframe::{egui, epi};
-use egui::Vec2;
 use std::sync::{Arc, Mutex};
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -107,6 +106,9 @@ const GEOSITE_URL: &str = "/geosite.dat";
 
 #[cfg(target_arch = "wasm32")]
 use eframe::wasm_bindgen::{self, prelude::*};
+
+#[cfg(target_arch = "wasm32")]
+use egui::Vec2;
 
 /// This is the entry-point for all the web-assembly.
 /// This is called once from the HTML.
