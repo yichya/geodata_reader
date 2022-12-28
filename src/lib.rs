@@ -34,7 +34,9 @@ impl epi::App for MyApp {
                 match gm {
                     Download::Done(r) => match r {
                         Ok(geosite) => {
-                            for (index, element) in geosite.entry.iter().enumerate() {
+                            let mut s = geosite.entry.clone();
+                            s.sort_by_key(|x| x.country_code.clone());
+                            for (index, element) in s.iter().enumerate() {
                                 egui::CollapsingHeader::new(&element.country_code)
                                     .default_open(false)
                                     .show(ui, |ui| {
@@ -44,7 +46,7 @@ impl epi::App for MyApp {
                                                 0.0,
                                             ))
                                             .show(ui, |ui| {
-                                                for ele2 in &geosite.entry[index].domain {
+                                                for ele2 in &s[index].domain {
                                                     ui.monospace(&ele2.value);
                                                     ui.end_row()
                                                 }
