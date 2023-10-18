@@ -25,6 +25,8 @@ jobs:
           toolchain: stable
           target: wasm32-unknown-unknown
           override: true
+      - name: Install protoc-compiler
+        run: sudo apt update && sudo apt install -y protobuf-compiler
       - name: Rust Cache # cache the rust build artefacts
         uses: Swatinem/rust-cache@v1
       - name: Download and install Trunk binary

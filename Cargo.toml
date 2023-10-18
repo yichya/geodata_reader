@@ -13,14 +13,14 @@ eframe = { version = "0.21.0", default-features = false, features = [
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
     "persistence",   # Enable restoring app state when restarting the app.
 ] }
-prost = "0.9"
+prost = "0.12"
 ehttp = "0.2.0"
 
 # You only need serde if you want app persistence:
 serde = { version = "1", features = ["derive"] }
 
 [build-dependencies]
-prost-build = "0.9"
+prost-build = "0.12"
 
 # native:
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
