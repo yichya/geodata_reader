@@ -104,14 +104,15 @@ checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 
 [[package]]
 name = "ahash"
-version = "0.8.3"
+version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c99f64d1e06488f620f932677e24bc6e2897582980441ae90a671415bd7ec2f"
+checksum = "77c3a9648d43b9cd48db467b3f87fdd6e146bcc88ab0180006cef2179fe11d01"
 dependencies = [
  "cfg-if",
  "once_cell",
  "serde",
  "version_check",
+ "zerocopy",
 ]
 
 [[package]]
@@ -722,6 +723,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "ecolor"
+version = "0.24.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4b7637fc2e74d17e52931bac90ff4fc061ac776ada9c7fa272f24cdca5991972"
+
+[[package]]
 name = "eframe"
 version = "0.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -729,7 +736,7 @@ checksum = "3df3ce60931e5f2d83bab4484d1a283908534d5308cc6b0c5c22c59cd15ee7cc"
 dependencies = [
  "bytemuck",
  "directories-next",
- "egui",
+ "egui 0.21.0",
  "egui-winit",
  "egui_glow",
  "glow",
@@ -756,11 +763,22 @@ checksum = "6412a21e0bde7c0918f7fb44bbbb86b5e1f88e63c026a4e747cc7af02f76dfbe"
 dependencies = [
  "accesskit",
  "ahash",
- "epaint",
+ "epaint 0.21.0",
  "nohash-hasher",
  "ron",
  "serde",
  "tracing",
+]
+
+[[package]]
+name = "egui"
+version = "0.24.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c55bcb864b764eb889515a38b8924757657a250738ad15126637ee2df291ee6b"
+dependencies = [
+ "ahash",
+ "epaint 0.24.1",
+ "nohash-hasher",
 ]
 
 [[package]]
@@ -772,7 +790,7 @@ dependencies = [
  "accesskit_winit",
  "android-activity",
  "arboard",
- "egui",
+ "egui 0.21.0",
  "instant",
  "serde",
  "smithay-clipboard",
@@ -788,7 +806,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8257332fb168a965b3dca81d6a344e053153773c889cabdba0b3b76f1629ae81"
 dependencies = [
  "bytemuck",
- "egui",
+ "egui 0.21.0",
  "glow",
  "memoffset 0.6.5",
  "tracing",
@@ -824,6 +842,12 @@ dependencies = [
  "bytemuck",
  "serde",
 ]
+
+[[package]]
+name = "emath"
+version = "0.24.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a045c6c0b44b35e98513fc1e9d183ab42881ac27caccb9fa345465601f56cce4"
 
 [[package]]
 name = "enumflags2"
@@ -867,11 +891,25 @@ dependencies = [
  "ahash",
  "atomic_refcell",
  "bytemuck",
- "ecolor",
- "emath",
+ "ecolor 0.21.0",
+ "emath 0.21.0",
  "nohash-hasher",
  "parking_lot",
  "serde",
+]
+
+[[package]]
+name = "epaint"
+version = "0.24.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d1b9e000d21bab9b535ce78f9f7745be28b3f777f6c7223936561c5c7fefab8"
+dependencies = [
+ "ab_glyph",
+ "ahash",
+ "ecolor 0.24.1",
+ "emath 0.24.1",
+ "nohash-hasher",
+ "parking_lot",
 ]
 
 [[package]]
@@ -1052,7 +1090,7 @@ version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
  "eframe",
- "egui",
+ "egui 0.24.1",
  "ehttp",
  "prost",
  "prost-build",
@@ -3129,6 +3167,26 @@ dependencies = [
  "serde",
  "static_assertions",
  "zvariant",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.38",
 ]
 
 [[package]]
