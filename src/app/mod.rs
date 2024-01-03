@@ -107,7 +107,7 @@ impl eframe::App for GeoDataReader {
                                     if element.country_code.contains(
                                         self.category_search.to_ascii_uppercase().as_str(),
                                     ) {
-                                        for (_, ele2) in element.domain.iter().enumerate() {
+                                        for ele2 in element.domain.iter() {
                                             if ele2.value.contains(self.domain_search.as_str()) {
                                                 if ui.link(element.country_code.clone()).clicked() {
                                                     self.category_selected = index
