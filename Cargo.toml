@@ -12,7 +12,7 @@ eframe = { version = "0.24", default-features = false, features = [
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
 ] }
 prost = "0.12"
-ehttp = "0.2.0"
+ehttp = "0.3.1"
 
 # You only need serde if you want app persistence:
 serde = { version = "1", features = ["derive"] }
