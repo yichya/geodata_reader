@@ -11,7 +11,7 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "GeoData Reader (data from Xray v1.8.16)",
         native_options,
-        Box::new(|cc| Box::new(geodata_reader::GeoDataReader::new(cc))),
+        Box::new(|cc| Ok(Box::new(geodata_reader::GeoDataReader::new(cc)))),
     )
 }
 
@@ -31,7 +31,7 @@ fn main() {
             .start(
                 "the_canvas_id", // hardcode it
                 web_options,
-                Box::new(|cc| Box::new(geodata_reader::GeoDataReader::new(cc))),
+                Box::new(|cc| Ok(Box::new(geodata_reader::GeoDataReader::new(cc)))),
             )
             .await
             .expect("failed to start eframe");
