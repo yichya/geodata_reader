@@ -6,7 +6,7 @@ edition = "2021"
 rust-version = "1.79"
 
 [dependencies]
-eframe = { version = "0.27", default-features = false, features = [
+eframe = { version = "0.30", default-features = false, features = [
     "default_fonts", # Embed the default egui fonts.
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
 ] }
