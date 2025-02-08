@@ -6,28 +6,30 @@ edition = "2021"
 rust-version = "1.79"
 
 [dependencies]
-eframe = { version = "0.27", default-features = false, features = [
+eframe = { version = "0.30", default-features = false, features = [
     "default_fonts", # Embed the default egui fonts.
     "glow",          # Use the glow rendering backend. Alternative: "wgpu".
+    "wayland",       # To support Linux (and CI)
 ] }
-egui = "0.27"
+egui = "0.30"
 ehttp = "0.5.0"
 ipnet = "2"
 prost = "0.13"
+log = "0.4"
 
 [build-dependencies]
 prost-build = "0.13"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-tracing-subscriber = "0.3"
+env_logger = "0.11"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-console_error_panic_hook = "0.1"
-tracing-wasm = "0.2"
 wasm-bindgen-futures = "0.4"
+web-sys = "0.3.70"           # to access the DOM (to hide the loading text)
 
 [profile.release]
-opt-level = 2
+opt-level = 3
+lto = true
 
 [profile.dev.package."*"]
 opt-level = 2
