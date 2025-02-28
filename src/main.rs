@@ -6,7 +6,7 @@
 fn main() -> eframe::Result<()> {
     let native_options = eframe::NativeOptions::default();
     eframe::run_native(
-        "GeoData Reader (data from Xray v25.1.30)",
+        "GeoData Reader (data from Xray v25.2.21)",
         native_options,
         Box::new(|cc| Ok(Box::new(geodata_reader::GeoDataReader::new(cc)))),
     )
