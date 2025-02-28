@@ -2,8 +2,8 @@
 name = "geodata_reader"
 version = "0.1.0"
 authors = ["yichya <mail@yichya.dev>"]
-edition = "2021"
-rust-version = "1.79"
+edition = "2024"
+rust-version = "1.85"
 
 [dependencies]
 eframe = { version = "0.31", default-features = false, features = [
