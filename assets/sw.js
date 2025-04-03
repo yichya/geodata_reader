@@ -2,6 +2,8 @@ var cacheName = 'egui-template-pwa';
 var filesToCache = [
   './',
   './index.html',
+  './geoip.dat',
+  './geosite.dat',
   './geodata_reader.js',
   './geodata_reader_bg.wasm',
 ];
