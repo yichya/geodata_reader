@@ -14,7 +14,7 @@ eframe = { version = "0.31", default-features = false, features = [
 egui = "0.31"
 ehttp = "0.5.0"
 ipnet = "2"
-prost = "0.13"
+prost = "0.14"
 log = "0.4"
 
 [build-dependencies]
